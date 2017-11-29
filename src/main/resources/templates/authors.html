@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Authors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <header th:replace="fragments/navigation :: navigation"></header>
+      <h3>Add author</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <form th:action="@{/authors}" th:method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="50" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+        </div>
+      </div>
+      <br>
+      <h3>Authors</h3>
+      <p th:if="${authors.empty}">There are no authors.</p>
+      <table th:unless="${authors.empty}" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="author : ${authors}">
+            <td th:text="${author.name}">Author name</td>
+            <td class="text-right">
+              <form th:action="@{/authors/{id}(id=${author.id})}" th:method="DELETE">
+                <button type="submit" class="btn btn-primary bg-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

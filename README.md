@@ -1,2 +1,1 @@
-# wepa-project
-School project
+# Wepa News Application
