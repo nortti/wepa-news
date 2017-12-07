@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <style>
+      #no-objects, #object-table {
+      display: none;
+      }
+    </style>
+    <title th:text="${#strings.capitalize(plural)}">Title</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <ul class="nav" th:fragment="navigation">
+          <li class="nav-item" th:each="link : ${links}">
+            <a class="nav-link"
+               th:href="${#strings.toLowerCase(link)}"
+               th:text="${link}">Link</a>
+          </li>
+        </ul>
+      </header>
+      <h3 th:text="${'Add ' + singular}">Add object</h3>
+      <form id="create-form">
+        <div th:replace="@{'fragments/' + ${singular} + '-inputs'} :: ${singular + '-inputs'}"></div>
+        <button type="submit" class="btn btn-default">Add</button>
+      </form>
+      <br>
+      <ul id="errors" class="list-group"></ul>
+      <p id="no-objects" th:text="${'There are no ' + plural + '.'}">
+        There are no objects.
+      </p>
+      <table class="table" id ="object-table">
+        <caption th:text="${#strings.capitalize(plural)}">Caption</caption>
+        <thead>
+          <tr>
+            <th th:each="tableHeader : ${tableHeaders}" th:text="${tableHeader}">
+              Table header
+            </th>
+            <th></th><!-- edit -->
+            <th></th><!-- delete -->
+          </tr>
+        </thead>
+        <tbody id="object-table-body"></tbody>
+      </table>
+    </div>
+    <div id="modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 th:text="${'Update ' + singular}">Update object</h4>
+            <button type="button"
+                    class="close"
+                    data-dismiss="modal">&times;</button>
+          </div>
+          <form id="update-form">
+            <div id="update-form-inputs"></div>
+            <div class="modal-footer">
+              <button type="submit"
+                      class="btn btn-primary bg-success mr-auto">Save</button>
+              <button type="button"
+                      class="btn btn-default"
+                      data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+    <script src="javascript/lib/mustache.min.js"></script>
+    <script src="javascript/common.js"></script>
+    <div th:replace="@{'fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
+  </body>
+</html>

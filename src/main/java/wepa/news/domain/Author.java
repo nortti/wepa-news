@@ -1,27 +1,26 @@
 package wepa.news.domain;
 
+import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Author extends AbstractPersistable<Long> {
+@Entity
+public class Author extends AbstractPersistable<Long> implements Serializable {
 
-    @Column(length = 50)
+    @NotBlank(message = "Name must not be blank")
+    @Size(max = 50, message = "Name must be under 50 characters")
     private String name;
 
     @ManyToMany
     private List<NewsItem> newsItems;
-
-    public Author(String name) {
-        this.name = name;
-    }
 }

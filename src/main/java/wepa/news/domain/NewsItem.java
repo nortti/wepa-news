@@ -1,7 +1,7 @@
 package wepa.news.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,30 +19,36 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 @Entity
-@Builder
-public class NewsItem extends AbstractPersistable<Long> {
+public class NewsItem extends AbstractPersistable<Long> implements Serializable {
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(length = 1024)
+    @Column(nullable = false, length = 10000)
     private String leadText;
 
-    @Column(length = 16384)
+    @Column(nullable = false, length = 100000)
     private String content;
 
+    @Column(nullable = false)
     private LocalDate datePublished;
-
-    private int views;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(nullable = false)
     private byte[] imageData;
 
     @ManyToMany
+    @Column(nullable = false)
     private List<Category> categories;
 
     @ManyToMany
+    @Column(nullable = false)
     private List<Author> authors;
 
+    private int views;
+
+    public String getDatePublished() {
+        return datePublished.toString();
+    }
 }

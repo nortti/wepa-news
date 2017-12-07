@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Category scripts</title>
+  </head>
+  <body>
+    <div th:fragment="category-scripts">
+      <script id="object-template" type="text/template">
+        <tr>
+          <td class="col">
+            <h5>{{name}}</h5>
+          </td>
+          <td class="col">
+            <h5>{{displayInNavigation}}</h5>
+          </td>
+          <td class="col">
+            <button type="button"
+              class="update btn btn-primary bg-info"
+              value="{{id}}"
+              data-toggle="modal"
+              data-target="#modal">Update</button>
+          </td>
+          <td class="col">
+            <button type="button"
+              class="delete btn btn-primary bg-danger"
+              value="{{id}}">Delete</button>
+          </td>
+        </tr>
+      </script>
+      <script id="modal-form-template" type="text/template">
+        <input type="hidden" name="id" value="{{id}}">
+        <div id="modal-body" class="modal-body">
+          <div class="form-group">
+            <label for="update-name">Name</label>
+            <input type="text"
+              id="update-name"
+              name="name"
+              value="{{name}}"
+              class="form-control"
+              laceholder="Name"
+              maxlength="50">
+          </div>
+          <div class="form-check">
+            <label for="update-display-in-navigation" class="form-check-label">
+            <input type="checkbox"
+              id="update-display-in-navigation"
+              name="displayInNavigation"
+              class="form-check-input"
+              value="true"
+            {{#displayInNavigation}}checked{{/displayInNavigation}}>
+            In navigation
+            </label>
+          </div>
+        </div>
+      </script>
+      <script>
+        function baseUrl() {
+          return 'rest/categories/';
+        }
+      </script>
+    </div>
+  </body>
+</html>

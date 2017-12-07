@@ -1,71 +1,53 @@
 package wepa.news.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import wepa.news.domain.NewsItem;
-import wepa.news.service.AuthorService;
-import wepa.news.service.CategoryService;
-import wepa.news.service.NewsService;
+import wepa.news.domain.NewsItemWriteDTO;
+import wepa.news.service.NewsItemService;
 
-@Controller
-@RequestMapping("/news")
+@RestController
+@RequestMapping("/rest/news/")
 public class NewsController {
 
     @Autowired
-    private AuthorService authorService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private NewsService newsService;
+    private NewsItemService newsItemService;
 
     @GetMapping
-    public String newsControlPanel(Model model) {
-        model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("authors", authorService.getAllAuthors());
-        model.addAttribute("newsItems", newsService.getAllNews());
-        return "news";
+    public List<NewsItem> getAll() {
+        return newsItemService.findAll();
     }
 
+    @GetMapping("{id}")
+    public NewsItem getOne(@PathVariable Long id) {
+        return newsItemService.findById(id);
+    }
+
+    // No put mapping, FormData does not work with it
     @PostMapping
-    public String addNews(@RequestParam String title,
-            @RequestParam String leadText,
-            @RequestParam String content,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate publishingDate,
-            @RequestParam MultipartFile image,
-            @RequestParam List<Long> authorIds,
-            @RequestParam List<Long> categoryIds) throws IOException {
-
-        NewsItem newsItem = NewsItem.builder()
-                .title(title)
-                .leadText(leadText)
-                .content(content)
-                .datePublished(publishingDate)
-                .imageData(image.getBytes())
-                .authors(authorService.getAuthorsByIds(authorIds))
-                .categories(categoryService.getCategoriesByIds(categoryIds))
-                .build();
-
-        newsService.addNews(newsItem);
-        return "redirect:/news";
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void createOrUpdate(@Valid NewsItemWriteDTO newsItemDTO) throws IOException {
+        newsItemService.createOrUpdate(newsItemDTO);
     }
 
     @DeleteMapping("{id}")
-    public String deleteNews(@PathVariable Long id) {
-        newsService.deleteNews(id);
-        return "redirect:/news";
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        newsItemService.deleteById(id);
+    }
+
+    @GetMapping("{id}/image")
+    public byte[] getImage(@PathVariable Long id) {
+        return newsItemService.findById(id).getImageData();
     }
 }

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>News scripts</title>
+  </head>
+  <body>
+    <div th:fragment="news-scripts">
+      <script id="select-option-template" type="text/template">
+        <option value="{{id}}" {{#selected}}selected{{/selected}}>
+          {{name}}
+        </option>
+      </script>
+      <script id="object-template" type="text/template">
+        <tr>
+          <td class="col">
+            <h5>{{title}}</h5>
+          </td>
+          <td class="col">
+            {{#authors}}
+              <li>{{name}}</li>
+            {{/authors}}
+          </td>
+          <td class="col">
+            {{#categories}}
+              <li>{{name}}</li>
+            {{/categories}}
+          </td>
+          <td class="col">
+            <button type="button"
+              class="update btn btn-primary bg-info"
+              value="{{id}}" data-toggle="modal"
+              data-target="#modal">Update</button>
+          </td>
+          <td class="col">
+            <button type="button"
+              class="delete btn btn-primary bg-danger"
+              value="{{id}}">Delete</button>
+          </td>
+        </tr>
+      </script>
+      <script id="modal-form-template" type="text/template">
+        <input type="hidden" name="id" value="{{id}}">
+        <div id="modal-body" class="modal-body">
+          <div class="form-group">
+            <label for="update-title">Title</label>
+            <input type="text"
+              id="update-title"
+              name="title"
+              class="form-control"
+              value="{{title}}"
+              placeholder="Title"
+              maxlength="100">
+          </div>
+          <div class="form-group">
+            <label for="update-lead-text">Lead text</label>
+            <textarea id="update-lead-text"
+              name="leadText"
+              class="form-control"
+              maxlength="1000"
+              rows="3">{{leadText}}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="update-content">Content</label>
+            <textarea id="update-content"
+              name="content"
+              class="form-control"
+              maxlength="10000"
+              rows="6">{{content}}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="update-date-published">Publishing date</label>
+            <input type="date"
+              id="update-date-published"
+              name="datePublished"
+              class="form-control"
+              value="{{datePublished}}">
+          </div>
+          <div class="form-group">
+            <label for="update-image">Image</label>
+            <input type="file"
+              id="update-image"
+              name="image"
+              class="form-control-file"
+              value="{{image}}">
+            <img th:src="@{/rest/news/{{id}}/image}"
+              class="img-thumbnail"
+              alt="News image">
+          </div>
+          <div class="form-group">
+            <label for="update-author-ids">Authors</label>
+            <br>
+            <select id="update-author-ids"
+              name="authorIds"
+              class="custom-select" multiple>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="update-category-ids">Categories</label>
+            <br>
+            <select id="update-category-ids"
+              name="categoryIds"
+              class="custom-select" multiple>
+            </select>
+          </div>
+        </div>
+      </script>
+      <script src="javascript/news.js"></script>
+    </div>
+  </body>
+</html>
