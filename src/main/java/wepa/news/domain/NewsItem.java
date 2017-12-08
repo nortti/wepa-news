@@ -7,10 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -33,9 +31,10 @@ public class NewsItem extends AbstractPersistable<Long> implements Serializable 
     @Column(nullable = false)
     private LocalDate datePublished;
 
-    @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    // @Lob not working with postgres in prod
+    // maybe fix later
+    @Column(nullable = false, length = 2000000)
     private byte[] imageData;
 
     @ManyToMany
