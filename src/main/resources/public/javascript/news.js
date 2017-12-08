@@ -1,10 +1,20 @@
 /* global Mustache, refreshView, formToObject */
+
 function baseUrl() {
-    return 'rest/news/';
+    return '/rest/news/';
 }
+
+function authorsUrl() {
+    return '/rest/authors/';
+}
+
+function categoriesUrl() {
+    return '/rest/categories';
+}
+
 $(document).ready(function() {
-    createSelectOptions('rest/authors/', $('#author-ids'));
-    createSelectOptions('rest/categories/', $('#category-ids'));
+    createSelectOptions(authorsUrl(), $('#author-ids'));
+    createSelectOptions(categoriesUrl(), $('#category-ids'));
 });
 
 function createSelectOptions(url, selectElement, existingRelationships = null) {
@@ -38,26 +48,23 @@ function createSelectOptions(url, selectElement, existingRelationships = null) {
 }
 
 // override some handlers from common.js next
-// need to include select-options logic in this handler
 
+// need to include select-options logic in this handler
 $('#object-table-body .update').unbind('click');
 $('#object-table-body').on('click', '.update', function(event) {
     var id = event.target.value;
     $.getJSON(baseUrl() + id, function(data) {
         var template = $('#modal-form-template').html();
         var html = Mustache.render(template, data);
-        $('#update-form-inputs').html(html, function() {
-            console.log('clearered');
-        });
-        createSelectOptions('rest/authors/', $(
-            '#update-author-ids'), data.authors);
-        createSelectOptions('rest/categories/', $(
-            '#update-category-ids'), data.categories);
+        $('#update-form-inputs').html(html);
+        createSelectOptions(authorsUrl(),
+            $('#update-author-ids'), data.authors);
+        createSelectOptions(categoriesUrl(),
+            $('#update-category-ids'), data.categories);
     });
 });
 
 // need to send these differently (with FormData) due to the image
-
 $('#create-form, #update-form').unbind('submit');
 $('#create-form').on('submit', function(event) {
     event.preventDefault();

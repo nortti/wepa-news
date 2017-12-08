@@ -1,4 +1,4 @@
-package wepa.news.controller;
+package wepa.news.controller.rest;
 
 import java.util.List;
 import javax.validation.Valid;
@@ -16,7 +16,7 @@ import wepa.news.domain.NewsItemWriteDTO;
 import wepa.news.service.NewsItemService;
 
 @RestController
-@RequestMapping("/rest/news/")
+@RequestMapping("/rest/news")
 public class NewsController {
 
     @Autowired

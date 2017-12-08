@@ -27,6 +27,10 @@ function refreshView(restResponse = null) {
         restResponse.responseJSON.forEach(function (error) {
             $('<li class="list-group-item list-group-item-danger">').text(error).appendTo('#errors');
         });
+        // scroll view to errors
+        $('html, body').animate({
+            scrollTop: $("#errors").offset().top
+        }, 2000);
     } else { // Only reset forms on success
         $('#create-form')[0].reset();
         $('#update-form')[0].reset();

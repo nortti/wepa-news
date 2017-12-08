@@ -1,4 +1,4 @@
-package wepa.news.controller;
+package wepa.news.controller.rest;
 
 import java.util.List;
 import javax.validation.Valid;
@@ -16,7 +16,7 @@ import wepa.news.domain.Author;
 import wepa.news.service.AuthorService;
 
 @RestController
-@RequestMapping("/rest/authors/")
+@RequestMapping("/rest/authors")
 public class AuthorController {
 
     @Autowired

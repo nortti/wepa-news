@@ -24,6 +24,9 @@
                th:href="${#strings.toLowerCase(link)}"
                th:text="${link}">Link</a>
           </li>
+          <li class="nav-item ml-auto">
+            <a th:href="@{/logout}" class="nav-link">Logout</a>
+          </li>
         </ul>
       </header>
       <h3 th:text="${'Add ' + singular}">Add object</h3>
@@ -81,8 +84,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
-    <script src="javascript/lib/mustache.min.js"></script>
-    <script src="javascript/common.js"></script>
-    <div th:replace="@{'fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
+    <script th:src="@{/javascript/lib/mustache.min.js}"></script>
+    <script th:src="@{/javascript/common.js}"}></script>
+    <div th:replace="@{'/fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
   </body>
 </html>

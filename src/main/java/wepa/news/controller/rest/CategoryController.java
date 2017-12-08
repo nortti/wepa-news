@@ -1,4 +1,4 @@
-package wepa.news.controller;
+package wepa.news.controller.rest;
 
 import java.util.List;
 import javax.validation.Valid;
@@ -16,7 +16,7 @@ import wepa.news.domain.Category;
 import wepa.news.service.CategoryService;
 
 @RestController
-@RequestMapping("/rest/categories/")
+@RequestMapping("/rest/categories")
 public class CategoryController {
 
     @Autowired

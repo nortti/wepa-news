@@ -1,4 +1,4 @@
-package wepa.news.controller;
+package wepa.news.controller.rest;
 
 import java.io.IOException;
 import java.util.Collections;
