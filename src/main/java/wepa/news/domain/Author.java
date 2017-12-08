@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 @Data
 @Entity
-public class Author extends AbstractPersistable<Long> implements Serializable {
+public class Author extends AbstractPersistable<Long> {
 
     @NotBlank(message = "Name must not be blank")
     @Size(max = 50, message = "Name must be under 50 characters")

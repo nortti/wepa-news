@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 @Entity
-public class NewsItem extends AbstractPersistable<Long> implements Serializable {
+public class NewsItem extends AbstractPersistable<Long> {
 
     @Column(nullable = false, length = 100)
     private String title;
