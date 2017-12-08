@@ -48,6 +48,6 @@ public class NewsController {
 
     @GetMapping("{id}/image")
     public byte[] getImage(@PathVariable Long id) {
-        return newsItemService.findById(id).getImageData();
+        return newsItemService.findById(id).getImage().getImageData();
     }
 }
