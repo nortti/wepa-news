@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class NewsItem extends AbstractPersistable<Long> {
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 200)
     private String title;
 
     @Column(nullable = false, length = 10000)

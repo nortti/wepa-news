@@ -22,7 +22,7 @@ public class NewsItemWriteDTO {
     private Long id;
 
     @NotBlank(message = "Title must not be blank")
-    @Size(max = 100, message = "Title must be under 100 characters")
+    @Size(max = 200, message = "Title must be under 200 characters")
     private String title;
 
     @NotBlank(message = "Lead text must not be blank")
