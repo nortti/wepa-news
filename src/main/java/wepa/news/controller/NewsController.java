@@ -1,6 +1,5 @@
 package wepa.news.controller;
 
-import java.io.IOException;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +47,6 @@ public class NewsController {
 
     @GetMapping("{id}/image")
     public byte[] getImage(@PathVariable Long id) {
-        return newsItemService.getOne(id).getImage().getImageData();
+        return newsItemService.getOne(id).getImageData();
     }
 }

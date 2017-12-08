@@ -1,14 +1,11 @@
 package wepa.news.domain;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +29,8 @@ public class NewsItem extends AbstractPersistable<Long> {
     @Column(nullable = false)
     private LocalDate datePublished;
 
-    @OneToOne(optional = false)
-    private NewsImage image;
+    @Lob
+    private byte[] imageData;
 
     @ManyToMany
     @Column(nullable = false)

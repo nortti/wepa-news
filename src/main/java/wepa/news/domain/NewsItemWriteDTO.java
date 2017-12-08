@@ -38,7 +38,7 @@ public class NewsItemWriteDTO {
     private LocalDate datePublished;
 
     @NotNull(message = "An image must be provided")
-    private NewsImage newsImage;
+    private byte[] imageData;
 
     @ManyToMany
     @NotEmpty(message = "At least one author must be provided")
@@ -55,7 +55,7 @@ public class NewsItemWriteDTO {
         // in which case id is sent. If not set when updating, it will simply
         // be ignored.
         if (!image.isEmpty() || id != null) {
-            this.newsImage = new NewsImage(image.getBytes());
+            this.imageData = image.getBytes();
         }
     }
 }
