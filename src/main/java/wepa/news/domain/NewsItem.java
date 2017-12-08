@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @NoArgsConstructor
@@ -30,6 +31,7 @@ public class NewsItem extends AbstractPersistable<Long> {
     private LocalDate datePublished;
 
     @Lob
+    @Type(type = "image")
     private byte[] imageData;
 
     @ManyToMany
