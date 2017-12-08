@@ -28,18 +28,18 @@ public class NewsItemService {
     @Autowired
     CategoryService categoryService;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NewsItem> findAll() {
         return newsItemRepository.findAll();
     }
 
-    @Transactional
-    public void deleteById(Long id) {
-        newsItemRepository.deleteById(id);
+    @Transactional(readOnly = true)
+    public NewsItem getOne(Long id) {
+        return newsItemRepository.getOne(id);
     }
 
     @Transactional
-    public void createOrUpdate(NewsItemWriteDTO newsItemDTO) throws IOException {
+    public void save(NewsItemWriteDTO newsItemDTO) {
         NewsItem newsItem = new NewsItem();
         if (newsItemDTO.getId() != null) {
             newsItem = newsItemRepository.getOne(newsItemDTO.getId());
@@ -67,7 +67,7 @@ public class NewsItemService {
     }
 
     @Transactional
-    public NewsItem findById(Long id) {
-        return newsItemRepository.getOne(id);
+    public void deleteById(Long id) {
+        newsItemRepository.deleteById(id);
     }
 }

@@ -13,17 +13,17 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Category> findAllById(List<Long> ids) {
         return categoryRepository.findAllById(ids);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Category getOne(Long id) {
         return categoryRepository.getOne(id);
     }

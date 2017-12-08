@@ -30,14 +30,14 @@ public class NewsController {
 
     @GetMapping("{id}")
     public NewsItem getOne(@PathVariable Long id) {
-        return newsItemService.findById(id);
+        return newsItemService.getOne(id);
     }
 
     // No put mapping, FormData does not work with it
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createOrUpdate(@Valid NewsItemWriteDTO newsItemDTO) throws IOException {
-        newsItemService.createOrUpdate(newsItemDTO);
+    public void createOrUpdate(@Valid NewsItemWriteDTO newsItemDTO) {
+        newsItemService.save(newsItemDTO);
     }
 
     @DeleteMapping("{id}")
@@ -48,6 +48,6 @@ public class NewsController {
 
     @GetMapping("{id}/image")
     public byte[] getImage(@PathVariable Long id) {
-        return newsItemService.findById(id).getImage().getImageData();
+        return newsItemService.getOne(id).getImage().getImageData();
     }
 }
