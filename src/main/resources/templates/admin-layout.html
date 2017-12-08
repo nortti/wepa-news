@@ -86,6 +86,6 @@
             crossorigin="anonymous"></script>
     <script th:src="@{/javascript/lib/mustache.min.js}"></script>
     <script th:src="@{/javascript/common.js}"}></script>
-    <div th:replace="@{'/fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
+    <div th:replace="@{'fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
   </body>
 </html>
