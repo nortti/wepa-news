@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import wepa.news.domain.Author;
-import wepa.news.repository.AuthorRepository;
+import wepa.news.service.AuthorService;
 
 @RestController
 @RequestMapping("/rest/authors/")
 public class AuthorController {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
 
     @GetMapping
     public List<Author> getAll() {
-        return authorRepository.findAll();
+        return authorService.findAll();
     }
 
     @GetMapping("{id}")
     public Author getOne(@PathVariable Long id) {
-        return authorRepository.getOne(id);
+        return authorService.getOne(id);
     }
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void createOrUpdate(@Valid @RequestBody Author author) {
-        authorRepository.save(author);
+        authorService.save(author);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        authorRepository.deleteById(id);
+        authorService.deleteById(id);
     }
 }

@@ -21,10 +21,10 @@ public class NewsItemService {
     NewsItemRepository newsItemRepository;
 
     @Autowired
-    AuthorRepository authorRepository;
+    AuthorService authorService;
 
     @Autowired
-    CategoryRepository categoryRepository;
+    CategoryService categoryService;
 
     public List<NewsItem> findAll() {
         return newsItemRepository.findAll();
@@ -40,8 +40,8 @@ public class NewsItemService {
             newsItem = newsItemRepository.getOne(newsItemDTO.getId());
         }
 
-        List<Author> authors = (List<Author>) objectsFromIds(newsItemDTO.getAuthorIds(), authorRepository);
-        List<Category> categories = (List<Category>) objectsFromIds(newsItemDTO.getCategoryIds(), categoryRepository);
+        List<Author> authors = authorService.findAllById(newsItemDTO.getAuthorIds());
+        List<Category> categories = categoryService.findAllById(newsItemDTO.getCategoryIds());
 
         newsItem.setTitle(newsItemDTO.getTitle());
         newsItem.setLeadText(newsItemDTO.getLeadText());
@@ -60,9 +60,5 @@ public class NewsItemService {
 
     public NewsItem findById(Long id) {
         return newsItemRepository.getOne(id);
-    }
-
-    private List<?> objectsFromIds(List<Long> ids, JpaRepository repository) {
-        return ids.stream().map(id -> repository.findById(id).get()).collect(Collectors.toList());
     }
 }
