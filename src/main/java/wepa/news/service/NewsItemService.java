@@ -2,6 +2,7 @@ package wepa.news.service;
 
 import java.io.IOException;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wepa.news.domain.Author;
@@ -62,6 +63,7 @@ public class NewsItemService {
         newsItemRepository.save(newsItem);
     }
 
+    @Transactional
     public NewsItem findById(Long id) {
         return newsItemRepository.getOne(id);
     }
