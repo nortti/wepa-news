@@ -28,14 +28,17 @@ public class NewsItemService {
     @Autowired
     CategoryService categoryService;
 
+    @Transactional
     public List<NewsItem> findAll() {
         return newsItemRepository.findAll();
     }
 
+    @Transactional
     public void deleteById(Long id) {
         newsItemRepository.deleteById(id);
     }
 
+    @Transactional
     public void createOrUpdate(NewsItemWriteDTO newsItemDTO) throws IOException {
         NewsItem newsItem = new NewsItem();
         if (newsItemDTO.getId() != null) {
