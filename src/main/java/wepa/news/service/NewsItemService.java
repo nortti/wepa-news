@@ -2,9 +2,9 @@ package wepa.news.service;
 
 import java.io.IOException;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import wepa.news.domain.Author;
 import wepa.news.domain.Category;
 import wepa.news.domain.NewsImage;
