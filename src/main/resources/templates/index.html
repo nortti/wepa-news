@@ -1,3 +1,119 @@
-/admin
-<br><br>
-Credentials: readme.md
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <style>
+      body {
+        word-wrap: break-word;
+      }
+      #no-news,
+      #news {
+        display: none;
+      }
+    </style>
+    <title th:text="${'Wepa News' + categoryName}">Wepa News</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <ul class="nav" id="categories">
+          <li class="nav-item">
+            <a th:href="@{/}" class="nav-link">All categories</a>
+          </li>
+          <li th:each="category : ${categories}" class="nav-item">
+            <a th:href="@{|/${category.name}|}"
+               th:text="${category.name}"class="nav-link">Category name</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <a th:href="@{/login}" class="nav-link">Login</a>
+          </li>
+        </ul>
+      </header>
+      <h2>Wepa News<span th:if="${currentCategory != ''}" th:text="${' - ' + currentCategory}">Static summary</span></h2>
+      <p id="no-news">Stay tuned.</p>
+      <div id="news">
+        <div class="row">
+          <div class="col-sm-9">
+            <div id="newest-news"></div>
+          </div>
+          <div class="col-sm-3">
+            <h6>Most viewed</h6>
+            <div id="most-viewed-news"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div id="modal-news"></div>
+          <div class="modal-footer">
+            <button type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script id="news-item-template" type="text/template">
+      <hr>
+      <a href="#" id="{{id}}" class="news" data-toggle="modal" data-target="#modal">
+        <div class="row">
+          <div class="col-md-3">
+            <img th:src="@{/rest/news/{{id}}/image}" class="img-fluid" alt="News image">
+          </div>
+          <div class="col-md-9">
+            <h3>{{title}}</h3>
+            <p>{{leadText}}</p>
+          </div>
+        </div>
+      </a>
+    </script>
+    <script id="most-viewed-news-item-template" type="text/template">
+      <hr>
+      <a href="#" id="{{id}}" class="news" data-toggle="modal" data-target="#modal">
+          <h3>{{title}}</h3>
+          <p>{{datePublished}}</p>
+      </a>
+    </script>
+    <script id="news-modal-template" type="text/template">
+      <div class="modal-header">
+        <h5 class="modal-title">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img th:src="@{/rest/news/{{id}}/image}" class="img-fluid" alt="News image">
+        <p>{{#authors}} - <i>{{name}}</i> {{/authors}} -</p>
+        <p>Published: {{datePublished}}</p>
+        <b>{{leadText}}</b>
+        <p>{{content}}</p>
+      </div>
+    </script>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+        function currentCategory() {
+          return /*[[${currentCategory} + '/']]*/ 'Current category';
+        }
+       /*]]>*/
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/javascript/lib/mustache.min.js}"></script>
+    <script th:src="@{/javascript/index.js}"></script>
+  </body>
+</html>

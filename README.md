@@ -1,4 +1,6 @@
 # Wepa News Application
-https://wepa-news.herokuapp.com/admin
+https://wepa-news.herokuapp.com/
+
 user: admin
+
 pass: letmein

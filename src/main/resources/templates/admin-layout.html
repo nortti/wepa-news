@@ -9,8 +9,9 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
           crossorigin="anonymous">
     <style>
-      #no-objects, #object-table {
-      display: none;
+      #no-objects,
+      #object-table {
+        display: none;
       }
     </style>
     <title th:text="${#strings.capitalize(plural)}">Title</title>
@@ -63,7 +64,9 @@
                     data-dismiss="modal">&times;</button>
           </div>
           <form id="update-form">
-            <div id="update-form-inputs"></div>
+            <div id="modal-body" class="modal-body">
+              <div id="update-form-inputs"></div>
+            </div>
             <div class="modal-footer">
               <button type="submit"
                       class="btn btn-primary bg-success mr-auto">Save</button>
@@ -85,7 +88,7 @@
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
     <script th:src="@{/javascript/lib/mustache.min.js}"></script>
-    <script th:src="@{/javascript/common.js}"></script>
+    <script th:src="@{/javascript/admin-common.js}"></script>
     <div th:replace="@{'fragments/' + ${singular} + '-scripts'} :: ${singular + '-scripts'}"></div>
   </body>
 </html>

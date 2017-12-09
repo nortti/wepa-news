@@ -27,6 +27,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    @GetMapping("/navigation")
+    public List<Category> findAllInNavigation() {
+        return categoryService.findAllInNavigation();
+    }
+
     @GetMapping("{id}")
     public Category getOne(@PathVariable Long id) {
         return categoryService.getOne(id);

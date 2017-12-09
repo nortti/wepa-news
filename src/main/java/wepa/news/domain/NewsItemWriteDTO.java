@@ -2,7 +2,6 @@ package wepa.news.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 // We use a separate data transfer object for posting/putting news mostly because we
@@ -32,10 +30,6 @@ public class NewsItemWriteDTO {
     @NotBlank(message = "Content must not be blank")
     @Size(max = 10000, message = "Content must be under 10000 characters")
     private String content;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull(message = "A publishing date must be provided")
-    private LocalDate datePublished;
 
     @NotNull(message = "An image must be provided")
     private byte[] imageData;

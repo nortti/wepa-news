@@ -26,11 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/rest/**", "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/rest/**", "/javascript/**", "/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .permitAll()
+                .defaultSuccessUrl("/admin/news")
                 .and()
             .logout()
                 .logoutUrl("/logout")

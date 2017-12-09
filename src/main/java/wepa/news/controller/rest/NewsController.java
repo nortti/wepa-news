@@ -23,13 +23,42 @@ public class NewsController {
     private NewsItemService newsItemService;
 
     @GetMapping
-    public List<NewsItem> getAll() {
+    public List<NewsItem> findAll() {
         return newsItemService.findAll();
+    }
+
+    @GetMapping("/newest/{count}")
+    public List<NewsItem> findNewest(@PathVariable Integer count) {
+        return newsItemService.findNewest(count);
+    }
+
+    @GetMapping("/most-viewed/{count}")
+    public List<NewsItem> findMostViewed(@PathVariable Integer count) {
+        return newsItemService.findMostViewed(count);
+    }
+
+    @GetMapping("{categoryName}/newest/{count}")
+    public List<NewsItem> findNewestInCategory(
+            @PathVariable String categoryName,
+            @PathVariable Integer count) {
+        return newsItemService.findNewestInCategory(categoryName, count);
+    }
+
+    @GetMapping("{categoryName}/most-viewed/{count}")
+    public List<NewsItem> findMostViewedInCategory(
+            @PathVariable String categoryName,
+            @PathVariable Integer count) {
+        return newsItemService.findMostViewedInCategory(categoryName, count);
     }
 
     @GetMapping("{id}")
     public NewsItem getOne(@PathVariable Long id) {
         return newsItemService.getOne(id);
+    }
+
+    @GetMapping("{id}/read")
+    public NewsItem read(@PathVariable Long id) {
+        return newsItemService.read(id);
     }
 
     // No put mapping, FormData does not work with it

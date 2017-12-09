@@ -47,7 +47,7 @@ function createSelectOptions(url, selectElement, existingRelationships = null) {
     });
 }
 
-// override some handlers from common.js next
+// override some handlers from admin-common.js next
 
 // need to include select-options logic in this handler
 $('#object-table-body .update').unbind('click');

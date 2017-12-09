@@ -18,6 +18,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public List<Category> findAllInNavigation() {
+        return categoryRepository.findByDisplayInNavigation(true);
+    }
+
     @Transactional(readOnly = true)
     public List<Category> findAllById(List<Long> ids) {
         return categoryRepository.findAllById(ids);

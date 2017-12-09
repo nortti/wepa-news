@@ -42,7 +42,7 @@ public class AdminController {
     public String news(Model model) {
         model.addAttribute("singular", "news");
         model.addAttribute("plural", "news");
-        model.addAttribute("tableHeaders", Arrays.asList("Name", "Authors", "Categories"));
+        model.addAttribute("tableHeaders", Arrays.asList("Name", "Published", "Views", "Authors", "Categories"));
         model.addAttribute("links", links);
         model.addAttribute("scripts", "news-scripts");
         return "admin-layout";

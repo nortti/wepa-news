@@ -30,28 +30,26 @@
       </script>
       <script id="modal-form-template" type="text/template">
         <input type="hidden" name="id" value="{{id}}">
-        <div id="modal-body" class="modal-body">
-          <div class="form-group">
-            <label for="update-name">Name</label>
-            <input type="text"
-              id="update-name"
-              name="name"
-              value="{{name}}"
-              class="form-control"
-              laceholder="Name"
-              maxlength="50">
-          </div>
-          <div class="form-check">
-            <label for="update-display-in-navigation" class="form-check-label">
-            <input type="checkbox"
-              id="update-display-in-navigation"
-              name="displayInNavigation"
-              class="form-check-input"
-              value="true"
-            {{#displayInNavigation}}checked{{/displayInNavigation}}>
-            In navigation
-            </label>
-          </div>
+        <div class="form-group">
+          <label for="update-name">Name</label>
+          <input type="text"
+            id="update-name"
+            name="name"
+            value="{{name}}"
+            class="form-control"
+            laceholder="Name"
+            maxlength="50">
+        </div>
+        <div class="form-check">
+          <label for="update-display-in-navigation" class="form-check-label">
+          <input type="checkbox"
+            id="update-display-in-navigation"
+            name="displayInNavigation"
+            class="form-check-input"
+            value="true"
+          {{#displayInNavigation}}checked{{/displayInNavigation}}>
+          In navigation
+          </label>
         </div>
       </script>
       <script>

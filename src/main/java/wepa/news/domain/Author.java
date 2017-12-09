@@ -1,7 +1,9 @@
 package wepa.news.domain;
 
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -21,5 +23,6 @@ public class Author extends AbstractPersistable<Long> {
     private String name;
 
     @ManyToMany
+    @Basic(fetch = FetchType.LAZY)
     private List<NewsItem> newsItems;
 }

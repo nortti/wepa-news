@@ -1,9 +1,12 @@
 package wepa.news.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
@@ -18,33 +21,34 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class NewsItem extends AbstractPersistable<Long> {
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String title;
 
-    @Column(nullable = false, length = 10000)
+    @Column(length = 10000)
     private String leadText;
 
-    @Column(nullable = false, length = 100000)
+    @Column(length = 100000)
     private String content;
 
-    @Column(nullable = false)
-    private LocalDate datePublished;
+    private LocalDateTime datePublished;
 
     @Lob
     @Type(type = "image")
+    @Basic(fetch = FetchType.LAZY)
     private byte[] imageData;
 
     @ManyToMany
-    @Column(nullable = false)
+    @Basic(fetch = FetchType.LAZY)
     private List<Category> categories;
 
     @ManyToMany
-    @Column(nullable = false)
+    @Basic(fetch = FetchType.LAZY)
     private List<Author> authors;
 
     private int views;
 
     public String getDatePublished() {
-        return datePublished.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
+        return datePublished.format(formatter);
     }
 }
