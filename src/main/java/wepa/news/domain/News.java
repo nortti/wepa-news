@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,9 +40,11 @@ public class News extends AbstractPersistable<Long> {
 
     @ManyToMany
     @Basic(fetch = FetchType.LAZY)
+    @NotEmpty
     private List<Category> categories;
 
     @ManyToMany
+    @NotEmpty
     @Basic(fetch = FetchType.LAZY)
     private List<Author> authors;
 
