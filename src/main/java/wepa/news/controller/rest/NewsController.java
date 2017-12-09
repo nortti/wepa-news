@@ -11,71 +11,71 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import wepa.news.domain.NewsItem;
-import wepa.news.domain.NewsItemWriteDTO;
-import wepa.news.service.NewsItemService;
+import wepa.news.domain.News;
+import wepa.news.domain.NewsWriteDto;
+import wepa.news.service.NewsService;
 
 @RestController
 @RequestMapping("/rest/news")
 public class NewsController {
 
     @Autowired
-    private NewsItemService newsItemService;
+    private NewsService newsService;
 
     @GetMapping
-    public List<NewsItem> findAll() {
-        return newsItemService.findAll();
+    public List<News> findAll() {
+        return newsService.findAll();
     }
 
     @GetMapping("/newest/{count}")
-    public List<NewsItem> findNewest(@PathVariable Integer count) {
-        return newsItemService.findNewest(count);
+    public List<News> findNewest(@PathVariable Integer count) {
+        return newsService.findNewest(count);
     }
 
     @GetMapping("/most-viewed/{count}")
-    public List<NewsItem> findMostViewed(@PathVariable Integer count) {
-        return newsItemService.findMostViewed(count);
+    public List<News> findMostViewed(@PathVariable Integer count) {
+        return newsService.findMostViewed(count);
     }
 
     @GetMapping("{categoryName}/newest/{count}")
-    public List<NewsItem> findNewestInCategory(
+    public List<News> findNewestInCategory(
             @PathVariable String categoryName,
             @PathVariable Integer count) {
-        return newsItemService.findNewestInCategory(categoryName, count);
+        return newsService.findNewestInCategory(categoryName, count);
     }
 
     @GetMapping("{categoryName}/most-viewed/{count}")
-    public List<NewsItem> findMostViewedInCategory(
+    public List<News> findMostViewedInCategory(
             @PathVariable String categoryName,
             @PathVariable Integer count) {
-        return newsItemService.findMostViewedInCategory(categoryName, count);
+        return newsService.findMostViewedInCategory(categoryName, count);
     }
 
     @GetMapping("{id}")
-    public NewsItem getOne(@PathVariable Long id) {
-        return newsItemService.getOne(id);
+    public News getOne(@PathVariable Long id) {
+        return newsService.getOne(id);
     }
 
     @GetMapping("{id}/read")
-    public NewsItem read(@PathVariable Long id) {
-        return newsItemService.read(id);
+    public News read(@PathVariable Long id) {
+        return newsService.read(id);
     }
 
     // No put mapping, FormData does not work with it
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createOrUpdate(@Valid NewsItemWriteDTO newsItemDTO) {
-        newsItemService.save(newsItemDTO);
+    public void createOrUpdate(@Valid NewsWriteDto newsWriteDto) {
+        newsService.save(newsWriteDto);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        newsItemService.deleteById(id);
+        newsService.deleteById(id);
     }
 
     @GetMapping("{id}/image")
     public byte[] getImage(@PathVariable Long id) {
-        return newsItemService.getOne(id).getImageData();
+        return newsService.getOne(id).getImageData();
     }
 }

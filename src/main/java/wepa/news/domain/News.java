@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 @Entity
-public class NewsItem extends AbstractPersistable<Long> {
+public class News extends AbstractPersistable<Long> {
 
     @Column(length = 200)
     private String title;

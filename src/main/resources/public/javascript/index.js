@@ -37,8 +37,8 @@ function loadNews() {
 
 function newsListHtml(news, template) {
     var html = "";
-    $.each(news, function (i, newsItem) {
-        html += Mustache.render(template.html(), newsItem);
+    $.each(news, function (i, news) {
+        html += Mustache.render(template.html(), news);
     });
     return html;
 }

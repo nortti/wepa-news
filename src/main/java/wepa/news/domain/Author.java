@@ -24,5 +24,5 @@ public class Author extends AbstractPersistable<Long> {
 
     @ManyToMany
     @Basic(fetch = FetchType.LAZY)
-    private List<NewsItem> newsItems;
+    private List<News> news;
 }

@@ -13,39 +13,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import wepa.news.domain.Category;
-import wepa.news.service.CategoryService;
+import wepa.news.repository.CategoryRepository;
 
 @RestController
 @RequestMapping("/rest/categories")
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     public List<Category> getAll() {
-        return categoryService.findAll();
+        return categoryRepository.findAll();
     }
 
     @GetMapping("/navigation")
     public List<Category> findAllInNavigation() {
-        return categoryService.findAllInNavigation();
+        return categoryRepository.findByDisplayInNavigation(true);
     }
 
     @GetMapping("{id}")
     public Category getOne(@PathVariable Long id) {
-        return categoryService.getOne(id);
+        return categoryRepository.getOne(id);
     }
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void createOrUpdate(@Valid @RequestBody Category category) {
-        categoryService.save(category);
+        categoryRepository.save(category);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        categoryService.deleteById(id);
+        categoryRepository.deleteById(id);
     }
 }

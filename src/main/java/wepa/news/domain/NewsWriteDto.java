@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 // recieve a list of ids that need to be converted to authors/categories and
 // would like to use annotation validation for those too
 @Data
-public class NewsItemWriteDTO {
+public class NewsWriteDto {
 
     private Long id;
 
