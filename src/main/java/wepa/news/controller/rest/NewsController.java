@@ -53,7 +53,7 @@ public class NewsController {
 
     @GetMapping("{id}")
     public News getOne(@PathVariable Long id) {
-        return newsService.getOne(id);
+        return newsService.findById(id);
     }
 
     @GetMapping("{id}/read")
@@ -76,6 +76,6 @@ public class NewsController {
 
     @GetMapping("{id}/image")
     public byte[] getImage(@PathVariable Long id) {
-        return newsService.getOne(id).getImageData();
+        return newsService.findById(id).getImageData();
     }
 }

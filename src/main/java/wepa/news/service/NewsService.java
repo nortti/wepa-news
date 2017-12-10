@@ -2,6 +2,7 @@ package wepa.news.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -56,8 +57,9 @@ public class NewsService {
     }
 
     @Transactional(readOnly = true)
-    public News getOne(Long id) {
-        return newsRepository.getOne(id);
+    public News findById(Long id) {
+        Optional<News> news =  newsRepository.findById(id);
+        return news.isPresent() ? news.get() : null;
     }
 
     @Transactional
@@ -69,7 +71,7 @@ public class NewsService {
     }
 
     @Transactional
-    public void save(NewsWriteDto newsWriteDto) {
+    public News save(NewsWriteDto newsWriteDto) {
         News news = new News();
         if (newsWriteDto.getId() != null) {
             news = newsRepository.getOne(newsWriteDto.getId());
@@ -90,7 +92,7 @@ public class NewsService {
             news.setImageData(newsWriteDto.getImageData());
         }
 
-        newsRepository.save(news);
+        return newsRepository.save(news);
     }
 
     @Transactional

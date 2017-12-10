@@ -1,5 +1,7 @@
 package wepa.news.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -36,6 +38,7 @@ public class News extends AbstractPersistable<Long> {
     @Lob
     @Type(type = "image")
     @Basic(fetch = FetchType.LAZY)
+    @NotEmpty
     private byte[] imageData;
 
     @ManyToMany
@@ -53,5 +56,10 @@ public class News extends AbstractPersistable<Long> {
     public String getDatePublished() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
         return datePublished.format(formatter);
+    }
+
+    @JsonIgnore // Used in tests
+    public LocalDateTime getDateTimePublished() {
+        return datePublished;
     }
 }
